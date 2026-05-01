@@ -3,10 +3,17 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type { Database } from '@/types/database'
 
+// Behind a reverse proxy, request.url may contain the internal host (localhost:3000)
+// rather than the public-facing URL. NEXT_PUBLIC_SITE_URL overrides it.
+function siteOrigin(requestOrigin: string) {
+  return (process.env.NEXT_PUBLIC_SITE_URL ?? requestOrigin).replace(/\/$/, '')
+}
+
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
   const next = searchParams.get('next') ?? '/feed'
+  const base = siteOrigin(origin)
 
   if (code) {
     const cookieStore = await cookies()
@@ -33,9 +40,9 @@ export async function GET(request: Request) {
       const isNewUser = Date.now() - createdAt < 2 * 60 * 1000
 
       const destination = isNewUser ? `/feed?welcome=1` : next
-      return NextResponse.redirect(`${origin}${destination}`)
+      return NextResponse.redirect(`${base}${destination}`)
     }
   }
 
-  return NextResponse.redirect(`${origin}/auth/login?error=auth_failed`)
+  return NextResponse.redirect(`${base}/auth/login?error=auth_failed`)
 }
