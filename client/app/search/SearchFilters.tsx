@@ -132,7 +132,7 @@ export function SearchFilters({ query, defaultCountry = '' }: { query: string; d
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 z-50 neo-card p-5 w-96 max-w-[95vw] shadow-lg">
+        <div className="absolute left-0 sm:left-auto sm:right-0 top-full mt-2 z-50 neo-card p-5 w-96 max-w-[95vw] shadow-lg">
           <div className="flex flex-col gap-5">
 
             {/* Sort */}
