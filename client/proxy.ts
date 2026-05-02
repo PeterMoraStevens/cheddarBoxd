@@ -1,7 +1,13 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-const PROTECTED_PATHS = ['/feed', '/profile/edit']
+const PUBLIC_PATHS = ['/', '/auth/login', '/auth/callback', '/terms', '/privacy']
+
+function isPublic(pathname: string): boolean {
+  return PUBLIC_PATHS.some(
+    (p) => pathname === p || pathname.startsWith(p + '/')
+  )
+}
 
 export async function proxy(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request })
@@ -27,12 +33,11 @@ export async function proxy(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser()
 
-  const isProtected = PROTECTED_PATHS.some((p) => request.nextUrl.pathname.startsWith(p))
-
-  if (!user && isProtected) {
+  if (!user && !isPublic(request.nextUrl.pathname)) {
     const url = request.nextUrl.clone()
-    const next = url.pathname
+    const next = url.pathname + (url.search || '')
     url.pathname = '/auth/login'
+    url.search = ''
     url.searchParams.set('next', next)
     return NextResponse.redirect(url)
   }

@@ -107,8 +107,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       <div className="mb-6">
         <h1 className="text-3xl font-black uppercase tracking-tight mb-4">Search</h1>
         <Suspense fallback={null}>
-          <div className="flex gap-2 items-stretch max-w-3xl">
-            <div className="flex-1">
+          <div className="flex flex-wrap gap-2 items-stretch max-w-3xl">
+            <div className="w-full sm:flex-1">
               <SearchBar defaultValue={query} tab={tab} />
             </div>
             {tab === 'snacks' && (
