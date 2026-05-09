@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { toast } from '@/lib/toast'
+import Image from 'next/image'
 import type { Profile } from '@/types/database'
 
 const USERNAME_RE = /^[a-z0-9_]{3,30}$/
@@ -85,7 +86,9 @@ export function WelcomeModal({ profile }: WelcomeModalProps) {
       >
         {step === 'welcome' ? (
           <div className="p-8 flex flex-col items-center text-center gap-4">
-            <div className="text-7xl leading-none select-none">🧀</div>
+            <div className="leading-none select-none flex justify-center">
+              <Image src="/cheese.png" alt="Cheese" width={72} height={72} />
+            </div>
             <div>
               <h1 className="text-3xl font-black uppercase tracking-tight mb-1">
                 Welcome to CheddarBoxd
@@ -97,13 +100,12 @@ export function WelcomeModal({ profile }: WelcomeModalProps) {
 
             <ul className="text-left flex flex-col gap-3 w-full mt-2">
               {[
-                ['🔍', 'Search millions of snacks from the Open Food Facts database'],
-                ['★', 'Rate and review everything you eat'],
-                ['👥', 'Follow friends and see what they\'re snacking on'],
-                ['📊', 'Build your personal snack map and rating stats'],
-              ].map(([icon, text]) => (
+                'Search millions of snacks from the Open Food Facts database',
+                'Rate and review everything you eat',
+                'Follow friends and see what they\'re snacking on',
+                'Build your personal snack map and rating stats',
+              ].map((text) => (
                 <li key={text} className="flex items-start gap-3 text-sm">
-                  <span className="text-lg leading-none shrink-0 mt-0.5">{icon}</span>
                   <span className="text-[color:var(--text)]">{text}</span>
                 </li>
               ))}

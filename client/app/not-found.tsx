@@ -1,10 +1,13 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="neo-card p-12 text-center max-w-md w-full">
-        <div className="text-7xl mb-4">🧀</div>
+        <div className="mb-4 flex justify-center">
+          <Image src="/cheese.png" alt="Cheese" width={72} height={72} />
+        </div>
         <h1 className="text-6xl font-black uppercase tracking-tight mb-2">404</h1>
         <h2 className="text-2xl font-black uppercase tracking-tight mb-4">
           This Snack Has Left the Building

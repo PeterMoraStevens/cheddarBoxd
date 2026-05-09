@@ -19,8 +19,8 @@ export function ProductImage({ src, alt, fill, className, ...rest }: ProductImag
 
   if (failed) {
     return (
-      <div className={`${fill ? 'absolute inset-0' : ''} flex items-center justify-center bg-[color:var(--muted)] text-4xl select-none`}>
-        🧀
+      <div className={`${fill ? 'absolute inset-0' : ''} flex items-center justify-center bg-[color:var(--muted)] select-none`}>
+        <Image src="/cheese.png" alt="Cheese" width={48} height={48} />
       </div>
     )
   }

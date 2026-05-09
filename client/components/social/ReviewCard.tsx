@@ -69,6 +69,7 @@ export function ReviewCard({
               src={computeImgUrl(review.product_barcode)}
               alt={review.product_name}
               fill
+              sizes="48px"
               className="object-contain p-1"
             />
           </div>

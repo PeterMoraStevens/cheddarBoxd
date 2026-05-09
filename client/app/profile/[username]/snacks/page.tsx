@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { SnackGraph } from './SnackGraph'
 import type { SnackData } from './SnackGraph'
 import { computeImgUrl } from '@/lib/compute-img-url'
+import Image from 'next/image'
 
 interface SnackMapPageProps {
   params: Promise<{ username: string }>
@@ -38,7 +39,9 @@ export default async function SnackMapPage({ params }: SnackMapPageProps) {
           </a>
         </div>
         <div className="neo-card p-12 text-center">
-          <div className="text-5xl mb-4">🧀</div>
+          <div className="mb-4 flex justify-center">
+            <Image src="/cheese.png" alt="Cheese" width={48} height={48} />
+          </div>
           <h2 className="font-black text-xl mb-2">No reviews yet</h2>
           <p className="text-[color:var(--text-muted)] text-sm">
             Review some snacks to see your flavor map come to life.

@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { ReviewCard } from '@/components/social/ReviewCard'
 import Link from 'next/link'
 import { Users, Flame } from 'lucide-react'
+import Image from 'next/image'
 import type { ReviewWithProfile } from '@/types/database'
 
 export async function FeedContent({ userId }: { userId: string }) {
@@ -73,7 +74,9 @@ export async function FeedContent({ userId }: { userId: string }) {
 
         {followingReviews.length === 0 ? (
           <div className="neo-card p-10 text-center">
-            <div className="text-4xl mb-3">🧀</div>
+            <div className="mb-3 flex justify-center">
+              <Image src="/cheese.png" alt="Cheese" width={36} height={36} />
+            </div>
             <p className="font-black text-xl mb-2">
               {followingIds.length === 0 ? 'Nobody followed yet' : 'Nothing new from your crew'}
             </p>
